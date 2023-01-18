@@ -4,7 +4,6 @@ import com.enoca.backendChallenge2.dtos.CreateCustomerDto;
 import com.enoca.backendChallenge2.dtos.UpdateCustomerDto;
 import com.enoca.backendChallenge2.exceptions.CustomerNotFoundException;
 import com.enoca.backendChallenge2.models.Customer;
-import com.enoca.backendChallenge2.models.Order;
 import com.enoca.backendChallenge2.repos.CustomerRepo;
 import com.enoca.backendChallenge2.repos.OrderRepo;
 import com.enoca.backendChallenge2.results.*;
@@ -13,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -24,13 +22,11 @@ public class CustomerManager implements CustomerService{
     public CustomerManager(ModelMapper modelMapper, CustomerRepo customerRepo, OrderRepo orderRepo) {
         this.modelMapper = modelMapper;
         this.customerRepo = customerRepo;
-        this.orderRepo = orderRepo;
     }
 
 
     private ModelMapper modelMapper;
     private CustomerRepo customerRepo;
-    private OrderRepo orderRepo;
 
     @Override
     public Result create(CreateCustomerDto customerDto) {

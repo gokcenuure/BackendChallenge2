@@ -2,13 +2,10 @@ package com.enoca.backendChallenge2.services;
 
 import com.enoca.backendChallenge2.dtos.CreateOrderDto;
 import com.enoca.backendChallenge2.dtos.UpdateOrderDto;
+import com.enoca.backendChallenge2.exceptions.OrderNotFoundException;
 import com.enoca.backendChallenge2.models.Order;
 import com.enoca.backendChallenge2.repos.OrderRepo;
-import com.enoca.backendChallenge2.results.DataResult;
-import com.enoca.backendChallenge2.results.Result;
-import com.enoca.backendChallenge2.results.SuccessDataResult;
-import com.enoca.backendChallenge2.results.SuccessResult;
-import org.aspectj.weaver.ast.Or;
+import com.enoca.backendChallenge2.results.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,17 +47,26 @@ public class OrderManager implements OrderService{
 
     @Override
     public Result delete(int orderId) {
-        return null;
+        Order order = this.getByOrderId(orderId).getData();
+        return new SuccessResult("Order deleted");
     }
-
     @Override
     public DataResult<List<Order>> getAll() {
-        return null;
+        return new SuccessDataResult<List<Order>>
+        (this.orderRepo.findAll(),"Orders listed");
     }
 
     @Override
     public DataResult<Order> getByOrderId(int orderId) {
-        return null;
+        try {
+            Order order = this.orderRepo.findById(orderId).orElse(null);
+            if (order==null) {
+                throw new OrderNotFoundException("Invalid order id");
+            }
+            return new SuccessDataResult<Order>(order,"Order found");
+        } catch (OrderNotFoundException ex) {
+            return new ErrorDataResult("Error: " + ex.getMessage());
+        }
     }
 
     @Override

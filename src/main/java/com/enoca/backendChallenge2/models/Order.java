@@ -26,7 +26,6 @@ public class Order {
 
     private BigDecimal totalPrice;
 
-
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;

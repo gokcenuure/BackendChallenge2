@@ -13,8 +13,6 @@ public interface CustomerRepo extends JpaRepository<Customer,Integer> {
 
     List<Customer> findByNameContaining(String letter);
 
-
-
     @Query(value = "SELECT * FROM customers\n" +
             "WHERE customer_id NOT IN (SELECT customer_id FROM orders)", nativeQuery = true)
     List<Customer> findAllCustomersWithoutOrders();

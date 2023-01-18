@@ -3,7 +3,6 @@ package com.enoca.backendChallenge2.controllers;
 import com.enoca.backendChallenge2.dtos.CreateCustomerDto;
 import com.enoca.backendChallenge2.dtos.UpdateCustomerDto;
 import com.enoca.backendChallenge2.models.Customer;
-import com.enoca.backendChallenge2.models.Order;
 import com.enoca.backendChallenge2.results.DataResult;
 import com.enoca.backendChallenge2.results.Result;
 import com.enoca.backendChallenge2.services.CustomerService;
