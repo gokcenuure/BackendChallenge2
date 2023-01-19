@@ -17,9 +17,6 @@ public class DataResult<T> extends Result {
         this.data=data;
     }
 
-    public DataResult(boolean b, List<Customer> customersWithOrders) {
-    }
-
     public T getData() {
         return this.data;
     }

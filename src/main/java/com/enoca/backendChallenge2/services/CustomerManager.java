@@ -49,7 +49,8 @@ public class CustomerManager implements CustomerService{
 
     @Override
     public Result delete(int customerId) {
-        Customer customer = this.getByCustomerId(customerId).getData();
+        Customer customer = this.customerRepo.getById(customerId);
+        customerRepo.delete(customer);
         return new SuccessResult("Customer deleted");
     }
 
@@ -84,10 +85,7 @@ public class CustomerManager implements CustomerService{
     @Override
     public DataResult<List<Customer>> getCustomersByLetter(String letter) {
         List<Customer> customers = customerRepo.findByNameContaining(letter);
-        List<Customer> customersWithOrders = new ArrayList<>();
-        for (Customer customer : customers) {
-            if (!customer.getOrders().isEmpty()) {
-                customersWithOrders.add(customer);
-            }}
-        return new DataResult<>(true, customersWithOrders);   }}
+
+        return new DataResult<>(customers, true);
+    }}
 

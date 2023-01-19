@@ -3,6 +3,7 @@ package com.enoca.backendChallenge2.services;
 import com.enoca.backendChallenge2.dtos.CreateOrderDto;
 import com.enoca.backendChallenge2.dtos.UpdateOrderDto;
 import com.enoca.backendChallenge2.exceptions.OrderNotFoundException;
+import com.enoca.backendChallenge2.exceptions.ResourceNotFoundException;
 import com.enoca.backendChallenge2.models.Order;
 import com.enoca.backendChallenge2.repos.OrderRepo;
 import com.enoca.backendChallenge2.results.*;
@@ -47,7 +48,8 @@ public class OrderManager implements OrderService{
 
     @Override
     public Result delete(int orderId) {
-        Order order = this.getByOrderId(orderId).getData();
+        Order order = this.orderRepo.getById(orderId);
+        orderRepo.delete(order);
         return new SuccessResult("Order deleted");
     }
     @Override

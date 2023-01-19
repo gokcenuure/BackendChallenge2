@@ -25,7 +25,7 @@ public class Customer {
 
     private int age;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.REMOVE)
     @JsonIgnore
     private List<Order> orders;
 

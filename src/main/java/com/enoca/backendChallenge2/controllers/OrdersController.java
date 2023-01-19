@@ -8,6 +8,7 @@ import com.enoca.backendChallenge2.results.DataResult;
 import com.enoca.backendChallenge2.results.Result;
 import com.enoca.backendChallenge2.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -33,8 +34,8 @@ public class OrdersController {
         return this.orderService.update(order, id);
     }
 
-    @DeleteMapping("/order/delete")
-    public Result delete(int orderId) {
+    @DeleteMapping("/order/delete/{orderId}")
+    public Result delete(@PathVariable int orderId) {
         return this.orderService.delete(orderId);
     }
 
@@ -43,14 +44,14 @@ public class OrdersController {
         return orderService.getAll();
     }
 
-    @GetMapping("/order/getById")
-    public Result getByOrderId(int orderId) {
+    @GetMapping("/order/getById/{orderId}")
+    public Result getByOrderId(@PathVariable int orderId) {
         return this.orderService.getByOrderId(orderId);
     }
 
 
-    @GetMapping("/customers/orders/createdAfter")
-    public DataResult<List<Order>> getOrdersCreatedAfter(@RequestParam Date date) {
+    @GetMapping("/orders/createdAfter")
+    public DataResult<List<Order>> getOrdersCreatedAfter(@RequestParam @DateTimeFormat(pattern="yyyy-MM-dd") Date date) {
         return this.orderService.getOrdersCreatedAfter(date);
     }
 }

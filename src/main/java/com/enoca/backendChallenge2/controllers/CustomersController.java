@@ -32,8 +32,8 @@ public class CustomersController {
         return this.customerService.update(customer, id);
     }
 
-    @DeleteMapping("/delete")
-    public Result delete(int customerId) {
+    @DeleteMapping("/delete/{customerId}")
+    public Result delete(@PathVariable int customerId) {
         return this.customerService.delete(customerId);
     }
 

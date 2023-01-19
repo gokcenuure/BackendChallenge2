@@ -10,4 +10,6 @@ import lombok.NoArgsConstructor;
 public class CreateCustomerDto {
 
     private String name;
+
+    private int age;
 }
